@@ -60,6 +60,9 @@ createServer(async (request, response) => {
       )
       .pipeTo(Writable.toWeb(response), { signal: abortController.signal });
   } catch (error) {
-    console.error(error);
+    if (error.message.includes("abort"))
+      return console.log("Connection was aborted :()");
+
+    console.error({ error });
   }
 });
