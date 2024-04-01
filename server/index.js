@@ -4,6 +4,7 @@ import { stat } from "node:fs/promises";
 import { TransformStream } from "node:stream/web";
 import { Readable, Transform, Writable } from "node:stream";
 import { setTimeout } from "node:timers/promises";
+import byteSize from "byte-size";
 
 const PORT = 3000;
 const headers = {
@@ -17,4 +18,11 @@ createServer(async (request, response) => {
     response.end();
     return;
   }
+
+  let counter = 0;
+
+  const filename = "./data/archive.zip";
+  const { size } = await stat(filename);
+
+  console.log(`Processing ${byteSize(size)}`);
 });

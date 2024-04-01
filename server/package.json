@@ -9,6 +9,7 @@
   "author": "Samuel Ricardo",
   "license": "MIT",
   "dependencies": {
-    "byte-size": "^8.1.1"
+    "byte-size": "^8.1.1",
+    "csvtojson": "^2.0.10"
   }
 }
