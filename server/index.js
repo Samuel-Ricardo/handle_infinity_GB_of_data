@@ -65,4 +65,8 @@ createServer(async (request, response) => {
 
     console.error({ error });
   }
-});
+})
+  .listen(PORT)
+  .on("listening", (_) =>
+    console.log(`Server running at http://localhost:${PORT}/`),
+  );
