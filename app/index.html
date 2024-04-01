@@ -4,6 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>WebStreams :D</title>
+
+    <style>
+      .container {
+        padding: 10px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-gap: 20px;
+        align-items: stretch;
+      }
+      .grid > article {
+        border: 1px solid #ccc;
+      }
+      .grid .text {
+        padding: 20px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
