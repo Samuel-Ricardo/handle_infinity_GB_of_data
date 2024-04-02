@@ -7,7 +7,6 @@ import { setTimeout } from "node:timers/promises";
 
 import byteSize from "byte-size";
 import csvtojson from "csvtojson";
-import { title } from "node:process";
 
 const PORT = 3000;
 const headers = {
@@ -24,7 +23,7 @@ createServer(async (request, response) => {
 
   let counter = 0;
 
-  const filename = "./data/archive.zip";
+  const filename = "./data/animeflv.csv";
   const { size } = await stat(filename);
 
   console.log(`Processing ${byteSize(size)}`);

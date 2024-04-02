@@ -16,7 +16,7 @@ function parseNDJSON() {
   return new TransformStream({
     transform(chunk, controller) {
       for (const item of chunk.split("\n")) {
-        if (!item.lenght) continue;
+        if (!item.length) continue;
 
         try {
           controller.enqueue(JSON.parse(item));
@@ -34,10 +34,14 @@ function parseNDJSON() {
   });
 }
 
-function appendToHtml(element) {
-  let counter = 0;
-  let elementCounter = 0;
+let counter = 0;
+let elementCounter = 0;
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function appendToHtml(element) {
   return new WritableStream({
     write({ title, description, url }) {
       const card = `
@@ -50,13 +54,15 @@ function appendToHtml(element) {
       </article>
       `;
 
+      /* limit the number of elements rendered on the screen at once 
       if (++elementCounter > 20) {
         element.innerHTML = card;
         elementCounter = 0;
         return;
       }
+      */
 
-      element.innerHTML += card;
+      sleep(1000).then(() => (element.innerHTML += card));
     },
 
     abort(reason) {
@@ -74,7 +80,7 @@ let abortController = new AbortController();
 start.addEventListener("click", async () => {
   try {
     const reader = await consumeAPI(abortController.signal);
-    await reader.pipeTo(appendToHtml(cards), {
+    reader.pipeTo(appendToHtml(cards), {
       signal: abortController.signal,
     });
   } catch (error) {
