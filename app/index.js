@@ -64,3 +64,27 @@ function appendToHtml(element) {
     },
   });
 }
+
+const [start, stop_btn, cards] = ["start", "stop", "cards"].map((id) =>
+  document.getElementById(id),
+);
+
+let abortController = new AbortController();
+
+start.addEventListener("click", async () => {
+  try {
+    const reader = await consumeAPI(abortController.signal);
+    await reader.pipeTo(appendToHtml(cards), {
+      signal: abortController.signal,
+    });
+  } catch (error) {
+    console.error({ error });
+    if (!error.message.includes("abort")) throw error;
+  }
+});
+
+stop_btn.addEventListener("click", () => {
+  abortController.abort();
+  console.log("Aborting...", { signal: abortController.signal });
+  abortController = new AbortController();
+});
