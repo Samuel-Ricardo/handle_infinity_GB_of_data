@@ -33,3 +33,34 @@ function parseNDJSON() {
     },
   });
 }
+
+function appendToHtml(element) {
+  let counter = 0;
+  let elementCounter = 0;
+
+  return new WritableStream({
+    write({ title, description, url }) {
+      const card = `
+      <article>
+        <div class="text">
+          <h3>[${++counter}] ${title}</h3>
+          <p>${description.slice(0, 100)}</p>
+          <a href="${url}">Here's why</a>
+        </div>
+      </article>
+      `;
+
+      if (++elementCounter > 20) {
+        element.innerHTML = card;
+        elementCounter = 0;
+        return;
+      }
+
+      element.innerHTML += card;
+    },
+
+    abort(reason) {
+      console.log("Aborted", { reason });
+    },
+  });
+}
