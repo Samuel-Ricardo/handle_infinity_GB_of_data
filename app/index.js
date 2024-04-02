@@ -1,3 +1,17 @@
+const API_URL = "http://localhost:3000";
+
+async function consumeAPI(signal) {
+  console.log("Consuming API", { signal });
+
+  const response = await fetch(API_URL, { signal });
+
+  const reader = response.body
+    .pipeThrough(new TextDecoderStream())
+    .pipeThrough(parseNDJSON());
+
+  return reader;
+}
+
 function parseNDJSON() {
   return new TransformStream({
     transform(chunk, controller) {
