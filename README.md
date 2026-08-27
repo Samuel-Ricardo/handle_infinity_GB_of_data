@@ -64,8 +64,8 @@ flowchart LR
 │   CSV File  │───▶│  csvtojson   │───▶│  Transform  │───▶│  HTTP Resp  │───▶│  Fetch API  │───▶│ TextDecoder│
 │  (1.8 MB)   │    │  (streaming) │    │  (mapping)  │    │  (NDJSON)   │    │  (stream)   │    │  (stream)  │
 └─────────────┘    └──────────────┘    └─────────────┘    └──────────────┘    └─────────────┘    └────────────┘
-                                                                                                         │
-                                                                                                         ▼
+                                                                                                          │
+                                                                                                          ▼
 ┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌────────────┐
 │   DOM UI    │◀───│  Writable   │◀───│  Transform  │◀───│  Readable   │◀───│  NDJSON     │◀───│  String    │
 │  (Grid)     │    │  (render)   │    │  (parse)    │    │  Stream     │    │  Lines      │    │  Chunks    │
@@ -321,3 +321,9 @@ Copyright (c) 2024 Samuel Ricardo
 - **Node.js Docs**: [Web Streams](https://nodejs.org/api/webstreams.html)
 - **Specification**: [WHATWG Streams](https://streams.spec.whatwg.org/)
 - **Pattern**: [NDJSON Specification](https://github.com/ndjson/ndjson-spec)
+
+---
+
+## 🎬 Demo Preview
+
+![Demo Screenshot](https://github.com/Samuel-Ricardo/handle_infinity_GB_of_data/assets/63983021/6170d1fc-b47c-4b3c-85e6-04aacf234526)
